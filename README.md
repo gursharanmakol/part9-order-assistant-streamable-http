@@ -163,6 +163,10 @@ python client.py
 
 The stdio client launches the server as a subprocess — no separate terminal needed.
 
+## Article
+
+[MCP in Practice — Part 9: From Concepts to a Hands-On Example](https://dev.to/gursharansingh/mcp-in-practice-part-9-from-concepts-to-a-hands-on-example-1g4p)
+
 ## The Teaching Goal
 
 A developer who built the Part 5 stdio version should look at the diff and think:
