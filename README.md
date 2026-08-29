@@ -2,6 +2,10 @@
 
 The same TechNova order assistant from Part 5, moved from **stdio** to **Streamable HTTP** transport. The tools, resources, prompts, and protocol flow are identical. Only the transport changed.
 
+This example runs on localhost to demonstrate the transition from stdio to Streamable HTTP. It is not a production deployment.
+
+Authentication, authorization, and other production security controls are intentionally out of scope for this lab; MCP Parts 6–8 cover those concerns.
+
 ## Prerequisites
 
 - Python **3.10+**
