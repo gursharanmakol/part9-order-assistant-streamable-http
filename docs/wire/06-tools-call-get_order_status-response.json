@@ -1,0 +1,20 @@
+{
+  "jsonrpc": "2.0",
+  "id": 3,
+  "result": {
+    "content": [
+      {
+        "text": "{\n  \"order_id\": \"ORD-10042\",\n  \"status\": \"shipped\",\n  \"carrier\": \"FedEx\",\n  \"delivery_estimate\": \"2026-03-28\"\n}",
+        "type": "text"
+      }
+    ],
+    "isError": false,
+    "resultType": "complete",
+    "_meta": {
+      "io.modelcontextprotocol/serverInfo": {
+        "name": "order-assistant",
+        "version": ""
+      }
+    }
+  }
+}

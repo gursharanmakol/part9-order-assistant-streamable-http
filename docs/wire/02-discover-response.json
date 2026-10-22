@@ -1,0 +1,30 @@
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "cacheScope": "private",
+    "capabilities": {
+      "prompts": {
+        "listChanged": true
+      },
+      "resources": {
+        "listChanged": true,
+        "subscribe": true
+      },
+      "tools": {
+        "listChanged": true
+      }
+    },
+    "resultType": "complete",
+    "supportedVersions": [
+      "2026-07-28"
+    ],
+    "ttlMs": 0,
+    "_meta": {
+      "io.modelcontextprotocol/serverInfo": {
+        "name": "order-assistant",
+        "version": ""
+      }
+    }
+  }
+}

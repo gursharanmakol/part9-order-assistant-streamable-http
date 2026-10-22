@@ -1,24 +1,19 @@
 import json
-import logging
 import os
 from pathlib import Path
 from typing import Any
 
 from dotenv import load_dotenv
-from mcp.server.fastmcp import FastMCP
+from mcp.server.mcpserver import MCPServer
 from mcp.types import ToolAnnotations
-
-# FastMCP logs every request/response at INFO level; drop that to WARNING so
-# the client terminal only shows meaningful output.
-logging.getLogger("mcp").setLevel(logging.WARNING)
 
 load_dotenv()
 
-app = FastMCP(name="order-assistant")
+app = MCPServer(name="order-assistant")
 
 
 # ---------------------------------------------------------------------------
-# Data helpers — unchanged from the low-level version
+# Data helpers - unchanged from the low-level version
 # ---------------------------------------------------------------------------
 
 def _data_path() -> Path:
@@ -62,7 +57,7 @@ def _find_order(data: dict[str, Any], order_id: str) -> dict[str, Any] | None:
 
 @app.tool(
     title="Order Status Lookup",
-    annotations=ToolAnnotations(readOnlyHint=True),
+    annotations=ToolAnnotations(read_only_hint=True),
 )
 async def get_order_status(order_id: str) -> dict:
     """
@@ -71,7 +66,7 @@ async def get_order_status(order_id: str) -> dict:
     Returns status, carrier, and estimated delivery date.
     Do not use this for general product availability questions.
     """
-    # FastMCP guarantees order_id is a str; we still reject empty strings.
+    # MCPServer guarantees order_id is a str; we still reject empty strings.
     if not order_id.strip():
         return {"error": "invalid_arguments", "message": "Expected a non-empty string argument: order_id"}
     order_id = order_id.strip()
@@ -91,7 +86,7 @@ async def get_order_status(order_id: str) -> dict:
 
 @app.tool(
     title="Order Line Items",
-    annotations=ToolAnnotations(readOnlyHint=True),
+    annotations=ToolAnnotations(read_only_hint=True),
 )
 async def get_order_items(order_id: str) -> dict:
     """
@@ -115,7 +110,7 @@ async def get_order_items(order_id: str) -> dict:
 
 @app.tool(
     title="Cancel Order",
-    annotations=ToolAnnotations(destructiveHint=True, idempotentHint=False),
+    annotations=ToolAnnotations(destructive_hint=True, idempotent_hint=False),
 )
 async def cancel_order(order_id: str) -> dict:
     """

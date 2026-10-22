@@ -1,0 +1,81 @@
+{
+  "jsonrpc": "2.0",
+  "id": 2,
+  "result": {
+    "cacheScope": "private",
+    "resultType": "complete",
+    "tools": [
+      {
+        "annotations": {
+          "readOnlyHint": true
+        },
+        "description": "\n    Retrieve the current status and shipping information for a customer order.\n    Use this when the user asks about a specific order by ID, order number, or reference code.\n    Returns status, carrier, and estimated delivery date.\n    Do not use this for general product availability questions.\n    ",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "order_id": {
+              "title": "Order Id",
+              "type": "string"
+            }
+          },
+          "required": [
+            "order_id"
+          ],
+          "title": "get_order_statusArguments"
+        },
+        "name": "get_order_status",
+        "title": "Order Status Lookup"
+      },
+      {
+        "annotations": {
+          "readOnlyHint": true
+        },
+        "description": "\n    Return the line items for a specific order. Use this when the user asks what is in an order\n    or wants a breakdown of products. Returns a list of items with name, quantity, and unit price.\n    ",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "order_id": {
+              "title": "Order Id",
+              "type": "string"
+            }
+          },
+          "required": [
+            "order_id"
+          ],
+          "title": "get_order_itemsArguments"
+        },
+        "name": "get_order_items",
+        "title": "Order Line Items"
+      },
+      {
+        "annotations": {
+          "destructiveHint": true,
+          "idempotentHint": false
+        },
+        "description": "\n    Cancel a customer order. This action is irreversible. Confirm with the user before invoking.\n    Do not call this tool based on an ambiguous request.\n    ",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "order_id": {
+              "title": "Order Id",
+              "type": "string"
+            }
+          },
+          "required": [
+            "order_id"
+          ],
+          "title": "cancel_orderArguments"
+        },
+        "name": "cancel_order",
+        "title": "Cancel Order"
+      }
+    ],
+    "ttlMs": 0,
+    "_meta": {
+      "io.modelcontextprotocol/serverInfo": {
+        "name": "order-assistant",
+        "version": ""
+      }
+    }
+  }
+}

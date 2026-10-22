@@ -1,0 +1,57 @@
+[
+  {
+    "index": 0,
+    "url": "http://127.0.0.1:8000/mcp",
+    "status_code": 200,
+    "request_headers": {
+      "accept": "application/json, text/event-stream",
+      "content-type": "application/json",
+      "mcp-protocol-version": "2026-07-28",
+      "mcp-method": "server/discover"
+    },
+    "response_headers": {
+      "content-type": "application/json"
+    },
+    "Mcp-Session-Id": false,
+    "Mcp-Method": true,
+    "Mcp-Name": false,
+    "MCP-Protocol-Version": true
+  },
+  {
+    "index": 1,
+    "url": "http://127.0.0.1:8000/mcp",
+    "status_code": 200,
+    "request_headers": {
+      "accept": "application/json, text/event-stream",
+      "content-type": "application/json",
+      "mcp-protocol-version": "2026-07-28",
+      "mcp-method": "tools/list"
+    },
+    "response_headers": {
+      "content-type": "application/json"
+    },
+    "Mcp-Session-Id": false,
+    "Mcp-Method": true,
+    "Mcp-Name": false,
+    "MCP-Protocol-Version": true
+  },
+  {
+    "index": 2,
+    "url": "http://127.0.0.1:8000/mcp",
+    "status_code": 200,
+    "request_headers": {
+      "accept": "application/json, text/event-stream",
+      "content-type": "application/json",
+      "mcp-protocol-version": "2026-07-28",
+      "mcp-method": "tools/call",
+      "mcp-name": "get_order_status"
+    },
+    "response_headers": {
+      "content-type": "application/json"
+    },
+    "Mcp-Session-Id": false,
+    "Mcp-Method": true,
+    "Mcp-Name": true,
+    "MCP-Protocol-Version": true
+  }
+]

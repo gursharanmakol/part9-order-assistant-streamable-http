@@ -1,25 +1,23 @@
 import json
-import logging
 import os
 from pathlib import Path
 from typing import Any
 
 from dotenv import load_dotenv
-from mcp.server.fastmcp import FastMCP
+from mcp.server.mcpserver import MCPServer
 from mcp.types import ToolAnnotations
-
-logging.getLogger("mcp").setLevel(logging.WARNING)
 
 load_dotenv()
 
 HOST = os.getenv("HOST", "127.0.0.1")
 PORT = int(os.getenv("PORT", "8000"))
 
-app = FastMCP(name="order-assistant", host=HOST, port=PORT, log_level="WARNING")
+# log_level=WARNING keeps uvicorn startup/access INFO off the learner terminal.
+app = MCPServer(name="order-assistant", log_level="WARNING")
 
 
 # ---------------------------------------------------------------------------
-# Data helpers — unchanged from the low-level version
+# Data helpers - unchanged from the low-level version
 # ---------------------------------------------------------------------------
 
 def _data_path() -> Path:
@@ -63,7 +61,7 @@ def _find_order(data: dict[str, Any], order_id: str) -> dict[str, Any] | None:
 
 @app.tool(
     title="Order Status Lookup",
-    annotations=ToolAnnotations(readOnlyHint=True),
+    annotations=ToolAnnotations(read_only_hint=True),
 )
 async def get_order_status(order_id: str) -> dict:
     """
@@ -91,7 +89,7 @@ async def get_order_status(order_id: str) -> dict:
 
 @app.tool(
     title="Order Line Items",
-    annotations=ToolAnnotations(readOnlyHint=True),
+    annotations=ToolAnnotations(read_only_hint=True),
 )
 async def get_order_items(order_id: str) -> dict:
     """
@@ -115,7 +113,7 @@ async def get_order_items(order_id: str) -> dict:
 
 @app.tool(
     title="Cancel Order",
-    annotations=ToolAnnotations(destructiveHint=True, idempotentHint=False),
+    annotations=ToolAnnotations(destructive_hint=True, idempotent_hint=False),
 )
 async def cancel_order(order_id: str) -> dict:
     """
@@ -214,10 +212,10 @@ async def customer_friendly_response(order_id: str) -> str:
 
 
 # ---------------------------------------------------------------------------
-# Entry point — Streamable HTTP transport (Part 9)
+# Entry point - Streamable HTTP transport (Part 9)
 # ---------------------------------------------------------------------------
 
 if __name__ == "__main__":
     print("Starting order-assistant MCP server (Streamable HTTP)...")
-    print(f"Endpoint: http://{HOST}:{PORT}{app.settings.streamable_http_path}", flush=True)
-    app.run(transport="streamable-http")
+    print(f"Endpoint: http://{HOST}:{PORT}/mcp", flush=True)
+    app.run(transport="streamable-http", host=HOST, port=PORT)
