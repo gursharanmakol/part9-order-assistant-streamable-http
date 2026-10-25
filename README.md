@@ -195,10 +195,12 @@ An example env file is included:
 
 | Setting | Value | Source |
 |---------|-------|--------|
-| Host | `127.0.0.1` | Lab default (`HOST`) |
+| Host | `127.0.0.1` | Lab default (`HOST`); keep it (see the warning below) |
 | Port | `8000` | Lab default (`PORT`) |
 | Path | `/mcp` | Streamable HTTP path used by this lab |
 | Full URL | **`http://127.0.0.1:8000/mcp`** | Combined |
+
+> **Keep `HOST` at `127.0.0.1`.** This demo has no authentication: any program that can reach the endpoint can call every tool, including `cancel_order`. Binding to `0.0.0.0` can make it reachable from other machines on your network. The server's `Origin` check is not authentication either: it blocks browser requests from other websites, but a request with no `Origin` header passes. And with SDK 2.3.0, the `Host` and `Origin` checks are enabled automatically only when `HOST` is `127.0.0.1`, `localhost` or `::1`; for any other value they are not enabled automatically.
 
 ## Validate with MCP Inspector (optional)
 
@@ -207,16 +209,16 @@ With the server running, you can use MCP Inspector to verify the endpoint and br
 In another terminal:
 
 ```bash
-npx @modelcontextprotocol/inspector
+npx @modelcontextprotocol/inspector@2.12.0
 ```
 
-This opens the Inspector UI in your browser. To connect:
+Inspector 2.12 opens in your browser with a list of example servers. To connect to this lab:
 
-1. Set **Transport Type** to **Streamable HTTP**
-2. Enter `http://127.0.0.1:8000/mcp` as the URL
-3. Click **Connect**
+1. On the **example-server-default** card (Streamable HTTP), click **Edit**, set the URL to `http://127.0.0.1:8000/mcp`, and click **Save**.
+2. On the same card, open **Settings** and set **Protocol Era** to **Modern (2026-07-28, sessionless)**.
+3. Turn on the card's switch to connect.
 
-If the connection succeeds, you'll see the three TechNova tools - Order Status Lookup, Order Line Items, and Cancel Order - listed in the Tools tab.
+Connection Info should show protocol 2026-07-28, era MODERN and session Sessionless, and the Tools tab lists the three TechNova tools: Order Status Lookup, Order Line Items, and Cancel Order. With the default **Legacy** era, Inspector uses the older 2025-11-25 handshake and its requests carry an `mcp-session-id` header; the Modern era has none.
 
 ![MCP Inspector connected to the Streamable HTTP server, showing the three order-assistant tools](images/mcp-inspector-streamable-http.png)
 *MCP Inspector connected over Streamable HTTP and listing the TechNova tools.*

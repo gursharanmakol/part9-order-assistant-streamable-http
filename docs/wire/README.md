@@ -2,7 +2,7 @@
 
 - Capture date: 2026-10-22
 - Transport: streamable-http
-- Capture method/tool: temporary Phase 1B script under `C:\Important\MCP-spike\capture\` (JSON-RPC dispatcher and HTTP header hooks against the final lab code; script not part of this repo)
+- Capture method/tool: a temporary capture script with JSON-RPC dispatcher and HTTP header hooks, run against the final lab code (the script is not part of this repo)
 - Python version: 3.12.9
 - mcp version: 2.3.0
 - MCP protocol revision: 2026-07-28
